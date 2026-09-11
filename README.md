@@ -136,5 +136,4 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for more informa
 
 ## 🌟 Acknowledgements
 
-- [EduLinkUp Community](https://github.com/EduLinkUp)
-- [Groq Fast Inference](https://groq.com)
+

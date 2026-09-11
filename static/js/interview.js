@@ -383,6 +383,8 @@ socket.on('final_report', (data) => {
     window.location.href = `/report?role=${encodeURIComponent(currentRole)}`;
 });
 
-setupIntegrityMonitoring();
-setScreenLock(!document.fullscreenElement);
-if (document.fullscreenElement) setupCamera();
+if (!window.__mobileDeviceBlocked) {
+    setupIntegrityMonitoring();
+    setScreenLock(!document.fullscreenElement);
+    if (document.fullscreenElement) setupCamera();
+}
