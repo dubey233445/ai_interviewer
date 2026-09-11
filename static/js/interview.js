@@ -32,6 +32,7 @@ let lastFocusEventAt = 0;
 let hasReportedFullscreenExit = false;
 let isFullscreenReady = false;
 let isScreenLocked = true;
+let interviewStartRequested = false;
 let tabSwitchCount = 0;
 let interviewEnded = false;
 const MAX_TAB_SWITCHES = 3;
@@ -64,6 +65,12 @@ function reportIntegrityEvent(type, details) {
         details,
         timestamp: new Date().toISOString()
     });
+}
+
+function startInterviewWhenReady() {
+    if (interviewStartRequested || !resumeId || !socket.connected || !document.fullscreenElement || isScreenLocked || interviewEnded) return;
+    interviewStartRequested = true;
+    socket.emit('start_interview', { resume_id: resumeId });
 }
 
 function endInterview(reason) {
@@ -151,6 +158,7 @@ function setupIntegrityMonitoring() {
             setScreenLock(false);
             updateIntegrityStatus('Integrity monitoring active');
             if (!mediaStream) setupCamera();
+            startInterviewWhenReady();
         }
         if (fullscreenBtn) fullscreenBtn.textContent = isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen';
     });
@@ -323,7 +331,7 @@ if (recordBtn) {
 }
 
 socket.on('connect', () => {
-    if (resumeId) socket.emit('start_interview', { resume_id: resumeId });
+    startInterviewWhenReady();
 });
 
 socket.on('interview_error', (data) => {
@@ -386,5 +394,8 @@ socket.on('final_report', (data) => {
 if (!window.__mobileDeviceBlocked) {
     setupIntegrityMonitoring();
     setScreenLock(!document.fullscreenElement);
-    if (document.fullscreenElement) setupCamera();
+    if (document.fullscreenElement) {
+        setupCamera();
+        startInterviewWhenReady();
+    }
 }
