@@ -19,8 +19,8 @@ You can contribute in several ways:
 ### 1. Fork and Clone the Repository
 ```bash
 # Clone your fork
-git clone https://github.com/<your-username>/open-source-ai-interviewer.git
-cd open-source-ai-interviewer
+git clone https://github.com/<your-username>/ai_interviewer.git
+cd ai_interviewer
 ```
 
 ### 2. Set Up Virtual Environment

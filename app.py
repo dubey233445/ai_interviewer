@@ -158,7 +158,15 @@ def handle_report(data):
         integrity_events.pop(session_id, None)
         return
 
-    report_data = json.loads(evaluator.generate_report(history, role=role))
+    try:
+        report_data = json.loads(evaluator.generate_report(history, role=role))
+    except Exception as e:
+        report_data = {
+            "technical_score": 5,
+            "soft_skills_score": 5,
+            "feedback": f"Report generated with fallback: {str(e)}",
+            "areas_to_improve": ["Clear articulation", "Structured STAR method responses", "Technical depth"]
+        }
     report_data['integrity_events'] = session_events
     report_json_str = json.dumps(report_data)
     

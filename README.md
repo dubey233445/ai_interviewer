@@ -37,8 +37,8 @@ An open-source, voice-interactive AI Interviewer that helps job candidates prepa
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/EduLinkUp/open-source-ai-interviewer.git
-cd open-source-ai-interviewer
+git clone https://github.com/dubey233445/ai_interviewer.git
+cd ai_interviewer
 ```
 
 ### 2. Create and Activate Virtual Environment
@@ -92,7 +92,7 @@ PORT=5000
 ## 📂 Project Structure
 
 ```text
-open-source-ai-interviewer/
+ai_interviewer/
 ├── static/
 │   ├── css/               # Styling stylesheets
 │   └── js/                # Client-side scripts (interview.js, main.js)
